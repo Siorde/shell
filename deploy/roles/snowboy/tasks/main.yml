@@ -1,0 +1,33 @@
+---
+- name: Install dependencies
+  apt :
+    name: "{{ packages }}"
+    update_cache: yes
+  vars:
+    packages:
+    - python-pyaudio
+    - python3-pyaudio
+    - sox
+    - python-pip
+    - python3-pip
+  become: true
+
+- name: Install pyaudio
+  pip: pyaudio
+  become: true
+
+- name: Set up audio
+  copy:
+    dest: "~/.asoundrc"
+    src: "asoundrc"
+
+- name: Download snowboy
+  get_url:
+    url: "https://s3-us-west-2.amazonaws.com/snowboy/snowboy-releases/{{ snowboy_version }}.tar.bz2"
+    dest: /tmp/snowboy.tar.bz2
+
+- name: Unarchive snowboy
+  unarchive:
+    src: /tmp/snowboy.tar.bz2
+    dest: /opt/snowboy
+    remote_src: yes
