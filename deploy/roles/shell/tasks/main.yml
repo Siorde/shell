@@ -1,0 +1,14 @@
+- name: copy hotword for snowboy
+  copy:
+    dest: "/opt/shell/snowboy/resources/"
+    src: "Hey Shell.pmdl"
+
+- name: add __init__.py for import
+  file:
+    path: /opt/shell/snowboy/__init__.py
+    state: touch
+
+- name: copy main script file
+  copy:
+    dest: "/opt/shell"
+    src: "main.py"
