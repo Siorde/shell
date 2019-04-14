@@ -12,3 +12,8 @@
   copy:
     dest: "/opt/shell"
     src: "main.py"
+
+- name: Install wave
+  pip: 
+    name: wave
+  become: true
