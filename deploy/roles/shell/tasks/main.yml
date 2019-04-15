@@ -17,3 +17,11 @@
   pip: 
     name: wave
   become: true
+
+- name: Create log folder
+  file:
+    path: /var/log/shell
+    state: directory
+    owner: pi
+    group: pi
+  become: true
